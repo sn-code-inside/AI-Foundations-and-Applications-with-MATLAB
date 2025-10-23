@@ -1,0 +1,47 @@
+[System]
+Name='acfis'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Temp'
+Range=[30 90]
+NumMFs=3
+MF1='LOW':'gbellmf',[12.5 2.5 30]
+MF2='MID':'gaussmf',[10.62 60]
+MF3='HIGH':'gbellmf',[12.5 2.5 90]
+
+[Input2]
+Name='Temp_Rate'
+Range=[0 5]
+NumMFs=3
+MF1='LOW':'gbellmf',[1.042 2.5 2.776e-17]
+MF2='MID':'gaussmf',[0.8847 2.5]
+MF3='HIGH':'gbellmf',[1.042 2.5 5]
+
+[Output1]
+Name='Motor_Speed'
+Range=[100 1000]
+NumMFs=3
+MF1='SLOW':'gbellmf',[187.5 2.5 100]
+MF2='MID':'gaussmf',[159.2 550]
+MF3='FAST':'gbellmf',[187.5 2.5 1000]
+
+[Rules]
+1 1, 3 (1) : 1
+1 2, 3 (1) : 1
+1 3, 2 (1) : 1
+2 1, 2 (1) : 1
+2 2, 1 (1) : 1
+2 3, 1 (1) : 1
+3 1, 2 (1) : 1
+3 2, 1 (1) : 1
+3 3, 1 (1) : 1
